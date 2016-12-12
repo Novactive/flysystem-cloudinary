@@ -35,7 +35,7 @@ class CloudinaryAdapter implements AdapterInterface
     public function write($path, $contents, Config $config)
     {
         try {
-            return $this->normalizeMetadata($this->api->upload($path, $contents));
+            return $this->normalizeMetadata($this->api->upload($path, $contents, $config->get("resource_type")));
         } catch (\Exception $e) {
             return false;
         }
