@@ -134,9 +134,9 @@ class CloudinaryAdapter implements AdapterInterface
      *
      * @return array|bool|null
      */
-    public function has($path)
+    public function has($path, $resource_type = null)
     {
-        return $this->getMetadata($path);
+        return $this->getMetadata($path, $resource_type);
     }
 
     /**
@@ -220,10 +220,14 @@ class CloudinaryAdapter implements AdapterInterface
      *
      * @return array|false
      */
-    public function getMetadata($path)
+    public function getMetadata($path, $resource_type = null)
     {
         try {
-            return $this->normalizeMetadata($this->api->resource($path));
+            $options = [];
+            if (!empty($resource_type)) {
+                $options['resource_type'] = $resource_type;
+            }
+            return $this->normalizeMetadata($this->api->resource($path, $options));
         } catch (\Exception $e) {
             return false;
         }
