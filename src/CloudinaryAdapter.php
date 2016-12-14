@@ -136,7 +136,11 @@ class CloudinaryAdapter implements AdapterInterface
      */
     public function has($path, $resource_type = null)
     {
-        return $this->getMetadata($path, $resource_type);
+        $res = $this->getMetadata($path, $resource_type);
+        if (!$res) {
+            $res = $this->getMetadata($path, 'raw');
+        }
+        return $res;
     }
 
     /**
