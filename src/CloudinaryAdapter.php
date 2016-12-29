@@ -167,10 +167,18 @@ class CloudinaryAdapter implements AdapterInterface
     public function readStream($path, $transformation = [])
     {
         try {
-            return [
+            $obj = [
                 'stream' => $this->api->content($path, $transformation),
                 'path' => $path,
             ];
+            if ($obj['stream'] == false) {
+                $obj = [
+                    'stream' => $this->api->content($path, ['resource_type' => 'raw']),
+                    'path' => $path,
+                ];
+            }
+
+            return $obj;
         } catch (\Exception $e) {
             return false;
         }
