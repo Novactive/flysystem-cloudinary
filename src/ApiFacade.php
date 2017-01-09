@@ -48,12 +48,9 @@ class ApiFacade extends BaseApi
      *
      * @return array
      */
-    public function upload($path, $contents, $resource_type)
+    public function upload($path, $contents, $options)
     {
-        $options = ['public_id' => $path];
-        if (!empty($resource_type)) {
-            $options['resource_type'] = $resource_type;
-        }
+        $options['public_id'] = $path;
         return Uploader::upload(new DataUri($contents), $options);
     }
 
