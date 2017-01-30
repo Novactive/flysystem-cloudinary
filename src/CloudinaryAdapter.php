@@ -39,7 +39,8 @@ class CloudinaryAdapter implements AdapterInterface
             $options = array(
                 'overwrite' => $config->get('overwrite', true),
                 'invalidate' => $config->get('invalidate', true),
-                'resource_type' => $config->get('resource_type', 'image')
+                'resource_type' => $config->get('resource_type', 'image'),
+                'face_coordinates' => $config->get('face_coordinates', null)
             );
 
             return $this->normalizeMetadata($this->api->upload($path, $contents, $options));
